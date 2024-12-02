@@ -1,6 +1,42 @@
-pool:  
-  vmImage: ubuntu-latest
+parameters:
+  - name: env
+    displayName: Choose environment you want to deploy.
+    type: string
+    default: dev
+    values:
+      - dev
+      - test
+trigger:
+- develop
+pool:
+  vmImage: 'Windows-latest'
+variables:
+ solution: '**/*.sln' 
+ folder: 'Tomtom.Ecmapp' 
+ repository: 'ecm-app'
+stages:
+  - stage: Build
+    displayName: Build stage
+    jobs:
+    - job: Webapp
+      displayName: Building the ECM app
+      variables:
+        buildPlatform: 'Any CPU'
+        buildConfiguration: 'Release'
+      steps:
+      - checkout: self           
+      - bash: ls -R          
+      - task: NuGetToolInstaller@1
+      - task: NuGetCommand@2
+        inputs:
+          restoreSolution: '$(solution)'
+      - powershell: |
+          echo "$(Build.BuildNumber)" > Tomtom.Ecmapp\buildnumber1.txt
+          gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+        displayName: 'Create build number file'
+  
+     
+      
 
-steps: 
-- script: echo Hello, world! 
-  displayName: 'Run a one-line script' 
+                  
+              
