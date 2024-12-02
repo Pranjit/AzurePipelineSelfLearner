@@ -2,7 +2,7 @@ trigger:
   - none
 
 pool:
-  Azure Pipelines
+  name: Azure Pipelines
 
 steps:
 - script: echo Hello, world!
