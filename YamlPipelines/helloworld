@@ -1,0 +1,9 @@
+trigger:
+- main  # Runs when code is pushed to 'main' branch
+
+pool:
+  vmImage: 'ubuntu-latest'  # Uses a Microsoft-hosted Ubuntu VM
+
+steps:
+- script: echo "Hello, World!"
+  displayName: 'Print Hello World'
