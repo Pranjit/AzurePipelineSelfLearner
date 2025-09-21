@@ -1,9 +1,10 @@
+# azure-pipelines.yml
 trigger:
-- main  # Trigger when code is pushed to 'main'
+- main
 
 pool:
-  name: default
+  vmImage: 'windows-latest'  # Microsoft-hosted agent
 
 steps:
-- script: echo "Hello, World!"
-  displayName: 'Print Hello World'
+- script: echo "Hello from Azure Pipeline!"
+  displayName: 'Run a simple script'
