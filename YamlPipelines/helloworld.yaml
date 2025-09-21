@@ -4,7 +4,7 @@ trigger:
 
 pool:
   name: 'Selfhosted'
-
+  
 steps:
 - script: echo "Hello from Azure Pipeline!"
   displayName: 'Run a simple script'
