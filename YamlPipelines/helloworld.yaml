@@ -1,9 +1,8 @@
 trigger:
-- main  # Runs when code is pushed to 'main' branch
+- main  # Trigger when code is pushed to 'main'
 
 pool:
-  name: Azure Pipelines
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'  # Microsoft-hosted Ubuntu VM
 
 steps:
 - script: echo "Hello, World!"
