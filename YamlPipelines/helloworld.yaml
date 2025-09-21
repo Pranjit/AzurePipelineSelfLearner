@@ -2,7 +2,7 @@ trigger:
 - main  # Trigger when code is pushed to 'main'
 
 pool:
-  vmImage: 'ubuntu-latest'  # Microsoft-hosted Ubuntu VM
+  name: default
 
 steps:
 - script: echo "Hello, World!"
