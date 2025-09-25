@@ -26,6 +26,9 @@ steps:
    - checkout: AzurePipelineSelfLearner
      persistCredentials: true
      clean: true
+  - checkout: AzurePipelineSelfLearner
+    persistCredentials: true
+    clean: true
 
 
   
