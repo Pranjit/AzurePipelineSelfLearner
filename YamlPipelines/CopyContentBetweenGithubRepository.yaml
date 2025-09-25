@@ -45,7 +45,7 @@ steps:
         git config user.name "Azure Pipeline"   
 
       # Stage the copied file
-        git add Resources\test.txt              
+        git add FileUpload\test.txt              
         
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
