@@ -32,11 +32,6 @@ steps:
     persistCredentials: true
     clean: true
 
-  # Step 3: Copy file using Windows PowerShell
-  - powershell: |
-      Write-Host "Copying file from SourceRepo to DestinationRepo..."
-      Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\" -Force
-    displayName: "Copy File to Destination Repo"
 
   
 
