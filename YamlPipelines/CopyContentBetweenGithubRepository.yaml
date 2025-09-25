@@ -11,12 +11,12 @@ resources:
     - repository: AzurePipelineSelfLearner
       type: github
       name: pranjit/AzurePipelineSelfLearner
-      endpoint: AzurePipelineSelfLearnerConnector 
+      endpoint: AzurePipelineUnivercity 
       
     - repository: OnlineResources
       type: github
       name: pranjit/OnlineResources
-      endpoint: AzurePipelineSelfLearnerConnector 
+      endpoint: AzurePipelineUnivercity 
 
 #The smallest unit of execution like scripts or predefined tasks.
 steps:
