@@ -27,11 +27,6 @@ steps:
      persistCredentials: true
      clean: true
 
-  # Step 2: Checkout destination repo
-  - checkout: OnlineResources
-    persistCredentials: true
-    clean: true
-
 
   
 
