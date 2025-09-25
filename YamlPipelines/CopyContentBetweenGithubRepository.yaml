@@ -34,7 +34,7 @@ steps:
 # Step 3: Copy file using Windows PowerShell
    - powershell: |
       Write-Host "Copying file from SourceRepo to DestinationRepo..."
-      Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\" -Force
+      Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\test.txt" -Force
      displayName: "Copy File to Destination Repo"
 # Step 4: Commit and push to destination repo
    - powershell: |
@@ -42,8 +42,7 @@ steps:
 
       # Configure Git identity
         git config user.email "pipeline@azuredevops.com" 
-        git config user.name "Azure Pipeline"        
-        git add Resources\test.txt
+        git config user.name "Azure Pipeline"   
 
       # Stage the copied file
         git add Resources\test.txt              
