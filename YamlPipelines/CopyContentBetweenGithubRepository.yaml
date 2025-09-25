@@ -27,7 +27,7 @@ steps:
      persistCredentials: true
      clean: true
  # Step 1: Checkout destination repo
-   - checkout: AzurePipelineSelfLearner
+   - checkout: OnlineResources
      persistCredentials: true
      clean: true
 
@@ -56,7 +56,7 @@ steps:
       } else {
         Write-Host "No changes to commit."
       }
-      
+
       displayName: "Commit and Push Changes"
   
 
