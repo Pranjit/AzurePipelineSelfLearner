@@ -43,10 +43,10 @@ steps:
       # Configure Git identity
         git config user.email "pipeline@azuredevops.com" 
         git config user.name "Azure Pipeline"        
-        git add config\config.txt
+        git add Resources\test.txt
 
       # Stage the copied file
-        git add config\config.txt              
+        git add Resources\test.txt              
         
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
