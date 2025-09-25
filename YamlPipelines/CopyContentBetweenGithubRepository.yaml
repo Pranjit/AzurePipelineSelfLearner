@@ -35,7 +35,7 @@ steps:
    - powershell: |
       Write-Host "Copying file from SourceRepo to DestinationRepo..."
       Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\" -Force
-      displayName: "Copy File to Destination Repo"
+     displayName: "Copy File to Destination Repo"
 # Step 4: Commit and push to destination repo
    - powershell: |
       Set-Location -Path "OnlineResources"
@@ -57,6 +57,6 @@ steps:
         Write-Host "No changes to commit."
       }
 
-      displayName: "Commit and Push Changes"
+     displayName: "Commit and Push Changes"
   
 
