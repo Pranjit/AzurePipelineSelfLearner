@@ -8,11 +8,13 @@ pool:
 
 resources:
   repositories:
+    # Source repository
     - repository: AzurePipelineSelfLearner
       type: github
       name: pranjit/AzurePipelineSelfLearner
       endpoint: AzurePipelineUnivercity 
-      
+   
+    # Destination repository
     - repository: OnlineResources
       type: github
       name: pranjit/OnlineResources
@@ -20,7 +22,40 @@ resources:
 
 #The smallest unit of execution like scripts or predefined tasks.
 steps:
+ # Step 1: Checkout source repo
+   - checkout: AzurePipelineSelfLearner
+     persistCredentials: true
+     clean: true
+
+  # Step 2: Checkout destination repo
   - checkout: OnlineResources
     persistCredentials: true
     clean: true
+
+  # Step 3: Copy file using Windows PowerShell
+  - powershell: |
+      Write-Host "Copying file from SourceRepo to DestinationRepo..."
+      Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\" -Force
+    displayName: "Copy File to Destination Repo"
+
+   # Step 4: Commit and push to destination repo
+  - powershell: |
+      Set-Location -Path "OnlineResources"
+
+      # Configure Git identity
+      git config user.email "pipeline@azuredevops.com"
+      git config user.name "Azure Pipeline"
+
+      # Stage the copied file
+      git add Resources\test.txt
+
+      # Commit only if there are changes
+      if ((git status --porcelain) -ne "") {
+        git commit -m "Automated copy of test.txt from SourceRepo"
+        git push origin main
+        Write-Host "Changes committed and pushed successfully."
+      } else {
+        Write-Host "No changes to commit."
+      }
+    displayName: "Commit and Push Changes"
 
