@@ -1,6 +1,6 @@
 # azure-pipelines.yml
 trigger:
-- main
+- none
 
 pool:
   name: 'Selfhosted'
