@@ -38,24 +38,5 @@ steps:
       Copy-Item -Path "AzurePipelineSelfLearner\Resources\test.txt" -Destination "OnlineResources\FileUpload\" -Force
     displayName: "Copy File to Destination Repo"
 
-   # Step 4: Commit and push to destination repo
-  - powershell: |
-      Set-Location -Path "OnlineResources"
-
-      # Configure Git identity
-      git config user.email "pipeline@azuredevops.com"
-      git config user.name "Azure Pipeline"
-
-      # Stage the copied file
-      git add Resources\test.txt
-
-      # Commit only if there are changes
-      if ((git status --porcelain) -ne "") {
-        git commit -m "Automated copy of test.txt from SourceRepo"
-        git push origin main
-        Write-Host "Changes committed and pushed successfully."
-      } else {
-        Write-Host "No changes to commit."
-      }
-    displayName: "Commit and Push Changes"
+  
 
