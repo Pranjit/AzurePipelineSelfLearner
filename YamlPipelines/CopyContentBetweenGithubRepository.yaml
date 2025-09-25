@@ -1,1 +1,14 @@
+#Defines branches or paths that trigger the pipeline.
+trigger : 
+   - none
+
+#Specifies where jobs run (Microsoft-hosted or self-hosted agents). Here we used selfhosted agent.   
+pool:
+  name: 'Selfhosted'
+
+#The smallest unit of execution like scripts or predefined tasks.
+steps:
+  - checkout: git://AzurePipelineUnivercity/AzurePipelineSelfLearner@main
+    persistCredentials: true
+    clean: true
 
