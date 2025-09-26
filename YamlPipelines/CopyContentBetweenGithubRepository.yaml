@@ -47,12 +47,12 @@ steps:
         git config user.name "Azure Pipeline"   
 
       # Stage the copied file
-        git add \FileUpload\test.txt              
+        git add "OnlineResources\FileUpload\test.txt"
         
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
         git commit -m "Automated copy of test.txt from SourceRepo"
-        git push origin main
+        git push origin HEAD
         Write-Host "Changes committed and pushed successfully."
       } else {
         Write-Host "No changes to commit."
