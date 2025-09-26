@@ -41,11 +41,9 @@ steps:
 # Step 4: Commit and push to destination repo
    - powershell: |
       Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
-      
       git add FileUpload/test.txt
       git commit -m "Add test.txt file"
       git push -u origin main
-
      displayName: "Commit and Push Changes"
   
 
