@@ -40,7 +40,7 @@ steps:
      displayName: "Copy File to Destination Repo"
 # Step 4: Commit and push to destination repo
    - powershell: |
-      Set-Location -Path "OnlineResources"
+      Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
 
       # Configure Git identity
         git config user.email "kalita.pranjit@hotmail.com" 
