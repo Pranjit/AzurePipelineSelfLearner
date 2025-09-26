@@ -41,15 +41,7 @@ steps:
 # Step 4: Commit and push to destination repo
    - powershell: |
       Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
-      Write-Host "Current working directory:"
-      Write-Host (Get-Location).Path
       
-      Write-Host "Current remote directory:"
-      git remote -v
-      
-      Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
-
-      git checkout -b main  # create branch if not exists
       git add FileUpload/test.txt
       git commit -m "Add test.txt file"
       git push -u origin main
