@@ -43,11 +43,11 @@ steps:
       Set-Location -Path "OnlineResources"
 
       # Configure Git identity
-        git config user.email "pipeline@azuredevops.com" 
+        git config user.email "kalita.pranjit@hotmail.com" 
         git config user.name "Azure Pipeline"   
 
       # Stage the copied file
-        git add "FileUpload/test.txt"
+        git add "FileUpload\test.txt"
         
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
