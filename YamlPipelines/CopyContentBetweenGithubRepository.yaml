@@ -19,7 +19,7 @@ resources:
     - repository: OnlineResources
       type: github
       name: pranjit/OnlineResources
-      endpoint: AzurePipelineUnivercity 
+      endpoint: OnlineResources 
       ref: refs/heads/main
 
 #The smallest unit of execution like scripts or predefined tasks.
