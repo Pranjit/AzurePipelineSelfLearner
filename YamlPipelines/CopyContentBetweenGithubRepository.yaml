@@ -42,7 +42,7 @@ steps:
    - powershell: |
       Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
       Write-Host "Current working directory:"
-      Get-Location
+      Write-Host (Get-Location).Path
       # Configure Git identity
         git config user.email "kalita.pranjit@hotmail.com" 
         git config user.name "Azure Pipeline"   
