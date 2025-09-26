@@ -43,6 +43,10 @@ steps:
       Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
       Write-Host "Current working directory:"
       Write-Host (Get-Location).Path
+      
+      Write-Host "Current remote directory:"
+      Write-Host git remote -v
+      
       # Configure Git identity
         git config user.email "kalita.pranjit@hotmail.com" 
         git config user.name "Azure Pipeline"   
@@ -53,7 +57,7 @@ steps:
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
         git commit -m "Automated copy of test.txt from SourceRepo"
-        git push main
+        git push origin main
         Write-Host "Changes committed and pushed successfully."
       } else {
         Write-Host "No changes to commit."
