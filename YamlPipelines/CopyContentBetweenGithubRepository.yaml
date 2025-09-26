@@ -47,21 +47,12 @@ steps:
       Write-Host "Current remote directory:"
       git remote -v
       
-      # Configure Git identity
-        git config user.email "kalita.pranjit@hotmail.com" 
-        git config user.name "Azure Pipeline"   
+      Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
 
-      # Stage the copied file
-        git add "FileUpload\test.txt"
-       
-      # Commit only if there are changes
-      if ((git status --porcelain) -ne "") {
-        git commit -m "Automated copy of test.txt from SourceRepo"
-        git push -u origin main
-        Write-Host "Changes committed and pushed successfully."
-      } else {
-        Write-Host "No changes to commit."
-      }
+      git checkout -b main  # create branch if not exists
+      git add FileUpload/test.txt
+      git commit -m "Add test.txt file"
+      git push -u origin main
 
      displayName: "Commit and Push Changes"
   
