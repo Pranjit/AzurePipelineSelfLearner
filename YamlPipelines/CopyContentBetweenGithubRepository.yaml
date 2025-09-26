@@ -57,7 +57,7 @@ steps:
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
         git commit -m "Automated copy of test.txt from SourceRepo"
-        git push origin main
+        git push -u origin main
         Write-Host "Changes committed and pushed successfully."
       } else {
         Write-Host "No changes to commit."
