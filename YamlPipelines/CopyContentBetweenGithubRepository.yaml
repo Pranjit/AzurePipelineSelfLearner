@@ -41,7 +41,8 @@ steps:
 # Step 4: Commit and push to destination repo
    - powershell: |
       Set-Location -Path "$(Build.SourcesDirectory)/OnlineResources"
-
+      Write-Host "Current working directory:"
+      Get-Location
       # Configure Git identity
         git config user.email "kalita.pranjit@hotmail.com" 
         git config user.name "Azure Pipeline"   
