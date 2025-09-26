@@ -49,7 +49,7 @@ steps:
 
       # Stage the copied file
         git add "FileUpload\test.txt"
-        git branch "Branch name"
+       
       # Commit only if there are changes
       if ((git status --porcelain) -ne "") {
         git commit -m "Automated copy of test.txt from SourceRepo"
