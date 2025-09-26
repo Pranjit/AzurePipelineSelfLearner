@@ -45,7 +45,7 @@ steps:
       Write-Host (Get-Location).Path
       
       Write-Host "Current remote directory:"
-      Write-Host git remote -v
+      git remote -v
       
       # Configure Git identity
         git config user.email "kalita.pranjit@hotmail.com" 
