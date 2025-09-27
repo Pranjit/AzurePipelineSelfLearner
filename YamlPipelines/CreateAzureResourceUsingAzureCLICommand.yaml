@@ -42,9 +42,8 @@ stages:
             displayName: 'Terraform Validate'
 
           # Step 4: Terraform Plan
-          - script: |
-              cd $(TF_WORKING_DIR)
-              terraform plan -out=tfplan \
+          - script: |             
+              terraform -chdir=$(TF_WORKING_DIR) plan -out=tfplan \
                 -var "subscription_id=$(AZURE_SUBSCRIPTION_ID)" \
                 -var "client_id=$(AZURE_CLIENT_ID)" \
                 -var "client_secret=$(AZURE_CLIENT_SECRET)" \
