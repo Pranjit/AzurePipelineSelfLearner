@@ -13,6 +13,10 @@ parameters:
       - test
       - prod  
     displayName: Select Environment
+variables:
+    selectedEnv: ${{ parameters.environment }}
+
 steps:
-- script: echo "Hello from Azure Pipeline!"
-  displayName: 'Run a simple script'
+- script: |
+    echo "Running in environment: $(selectedEnv)"
+  displayName: 'Print Selected Environment'
