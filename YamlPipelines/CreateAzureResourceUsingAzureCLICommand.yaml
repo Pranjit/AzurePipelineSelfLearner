@@ -1,7 +1,6 @@
-# azure-pipelines.yml
+# CreateAzureResourceUsingAzureCLICommand.yaml
 trigger:
 - none
-
 pool:
   name: 'Selfhosted'
   
