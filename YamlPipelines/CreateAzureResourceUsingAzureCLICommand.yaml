@@ -3,7 +3,16 @@ trigger:
 - none
 pool:
   name: 'Selfhosted'
-  
+
+parameters:  
+  - name: environment
+    type: string
+    default: dev    
+    values:
+      - dev
+      - test
+      - prod  
+    displayName: Select Environment
 steps:
 - script: echo "Hello from Azure Pipeline!"
   displayName: 'Run a simple script'
