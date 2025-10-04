@@ -16,6 +16,9 @@ steps:
   displayName: 'Display Secret'
 
 - script: |
-    echo "##vso[task.setvariable variable=plainSecret;issecret=false]$(pranjt-test-kv)"
+    echo "##vso[task.setvariable variable=plainSecret;issecret=false]$(mySecret)"
+  displayName: 'Set Unmasked Variable'
+
+- script: |
     echo "Unmasked secret: $(plainSecret)"
-  displayName: 'Unmasked Secret for Debugging'
+  displayName: 'Show Unmasked Secret'
