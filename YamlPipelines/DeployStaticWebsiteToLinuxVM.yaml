@@ -1,9 +1,56 @@
+# ============================================
+# Azure Pipelines: Top-Level Keywords Overview
+# ============================================
+# | Keyword         | Description                                             |
+# |------------------|---------------------------------------------------------|
+# | name             | Sets the name of the pipeline run.                     |
+# | trigger          | Defines which branches trigger the pipeline.           |
+# | pr               | Defines pull request trigger branches.                 |
+# | schedules        | Defines scheduled pipeline runs (cron format).         |
+# | variables        | Defines global variables.                              |
+# | resources        | External entities like repos, pipelines, containers.   |
+# | services         | Container services (e.g., Redis, MySQL) for jobs.      |
+# | stages           | Defines pipeline stages (each can have multiple jobs). |
+# | jobs             | Defines jobs when not using stages.                    |
+# | pool             | Agent pool for running the pipeline.                   |
+# | container        | Main container to run jobs in.                         |
+# | containers       | Define multiple containers for jobs.                   |
+# | workspace        | Customize source checkout and artifacts paths.         |
+# | lockBehavior     | Controls locking for environments during deployments.  |
+# | extends          | Reuse templates across pipelines.                      |
+# ============================================
+
+name: DeployStaticWebsiteToLinuxVM
+
 trigger:
 - none
 
-pool:
+pr: none
+
+pool:  
   name: Azure Pipelines
   vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: AzurePipelineSelfLearner
+      type: github
+      name: pranjit/AzurePipelineSelfLearner
+      endpoint: AzurePipelineUnivercity 
+      ref: refs/heads/main
+
+parameters:
+  - name: environment
+    default: "Playground" 
+    type: string   
+    values:
+      - Playground
+      - Prod
+    displayName: "Select Environment"
+
+variables:
+  TF_WORKING_DIR: "terraform/azure-linux-vmss-static-site"
+
 
 steps:
 - script: echo Hello, world!
