@@ -1,1 +1,15 @@
+trigger: none
+pr: none
+variables:
 
+  - name: pranjt-test-kv
+    value: $(pranjt-test-kv)
+steps: 
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'pranjit-playground(69869722-481a-4f0b-b1b2-800a599c43fd)'
+    KeyVaultName: 'kv-pranjit-playground'
+    SecretsFilter: 'pranjt-test-kv'
+    RunAsPreJob: true
+- script: echo "Secret value:$(pranjt-test-kv)"
+  displayName: 'Display Secret'
