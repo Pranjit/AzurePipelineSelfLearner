@@ -1,9 +1,6 @@
 trigger: none
 pr: none
-variables:
 
-  - name: pranjt-test-kv
-    value: $(pranjt-test-kv)
 steps: 
 - task: AzureKeyVault@2
   inputs:
