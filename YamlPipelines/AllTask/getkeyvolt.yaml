@@ -1,6 +1,10 @@
 trigger: none
 pr: none
 
+#Specifies where jobs run (Microsoft-hosted or self-hosted agents). Here we used selfhosted agent.   
+pool:
+  name: 'Selfhosted'
+  
 steps: 
 - task: AzureKeyVault@2
   inputs:
