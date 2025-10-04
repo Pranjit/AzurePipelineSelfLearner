@@ -8,7 +8,7 @@ pool:
 steps: 
 - task: AzureKeyVault@2
   inputs:
-    azureSubscription: 'pranjit-playground(69869722-481a-4f0b-b1b2-800a599c43fd)'
+    azureSubscription: 'pranjit-playground-kvaccess-con'
     KeyVaultName: 'kv-pranjit-playground'
     SecretsFilter: 'pranjt-test-kv'
     RunAsPreJob: true
