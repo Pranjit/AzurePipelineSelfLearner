@@ -106,7 +106,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     type_handler_version = "2.0"
 
     settings = jsonencode({
-      "commandToExecute" = "apt update && apt install -y nginx git && git clone ${var.html_repo_url} /var/www/html/"
+      "commandToExecute" = "apt update && apt install -y nginx"
     })
   }
 }
