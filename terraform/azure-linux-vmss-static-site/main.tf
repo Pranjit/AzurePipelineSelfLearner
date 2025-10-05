@@ -51,8 +51,7 @@ resource "azurerm_lb_probe" "http" {
 }
 
 resource "azurerm_lb_rule" "http" {
-  name                           = "http-rule"
-  resource_group_name            = var.resource_group_name
+  name                           = "http-rule"  
   loadbalancer_id                = azurerm_lb.lb.id
   protocol                       = "Tcp"
   frontend_port                  = 80
