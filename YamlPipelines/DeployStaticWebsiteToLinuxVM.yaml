@@ -54,6 +54,11 @@ variables:
     value: "terraform/azure-linux-vmss-static-site"  
 
 
-steps:
-- script: 'echo Hello, world! $(AZURE_CLIENT_ID)'
-  displayName: "Run a one-line script"
+
+stages:
+  - stage: 'Teraform Init+validate+Plan+Apply'
+    displayName: 'Teraform Init+validate+Plan+Apply'
+    jobs:
+      - job: "Te"
+      
+
