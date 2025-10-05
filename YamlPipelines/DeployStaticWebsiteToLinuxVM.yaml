@@ -55,5 +55,5 @@ variables:
 
 
 steps:
-- script: 'echo Hello, world! $(AZURE_CLIET_ID)'
+- script: 'echo Hello, world! $(AZURE_CLIENT_ID)'
   displayName: "Run a one-line script"
