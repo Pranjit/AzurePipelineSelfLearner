@@ -1,3 +1,7 @@
+subscription_id    = "YOUR_SUBSCRIPTION_ID"
+client_id          = "YOUR_SERVICE_PRINCIPAL_CLIENT_ID"
+client_secret      = "YOUR_SERVICE_PRINCIPAL_CLIENT_SECRET"
+tenant_id          = "YOUR_TENANT_ID"
 resource_group_name = "vmss-static-web-rg"
 location            = "eastus"
 html_repo_url       = "https://github.com/your-user/your-static-site-repo.git"
