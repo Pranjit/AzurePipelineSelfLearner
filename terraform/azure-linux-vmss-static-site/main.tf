@@ -43,8 +43,7 @@ resource "azurerm_lb_backend_address_pool" "bepool" {
 }
 
 resource "azurerm_lb_probe" "http" {
-  name                = "http-probe"
-  resource_group_name = var.resource_group_name
+  name                = "http-probe"  
   loadbalancer_id     = azurerm_lb.lb.id
   protocol            = "Http"
   port                = 80
