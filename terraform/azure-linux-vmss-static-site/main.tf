@@ -39,8 +39,7 @@ resource "azurerm_lb" "lb" {
 
 resource "azurerm_lb_backend_address_pool" "bepool" {
   name                = "BackendPool"
-  loadbalancer_id     = azurerm_lb.lb.id
-  resource_group_name = var.resource_group_name
+  loadbalancer_id     = azurerm_lb.lb.id  
 }
 
 resource "azurerm_lb_probe" "http" {
