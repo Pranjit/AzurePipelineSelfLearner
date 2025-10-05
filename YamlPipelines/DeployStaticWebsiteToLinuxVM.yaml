@@ -49,7 +49,7 @@ parameters:
     displayName: "Select Environment"
 
 variables:
-  - group: CommonVariables
+  - group: TerraformSecrets
   - name: TF_WORKING_DIR
     value: "terraform/azure-linux-vmss-static-site"  
 
