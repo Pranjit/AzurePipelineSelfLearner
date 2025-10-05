@@ -57,7 +57,7 @@ resource "azurerm_lb_rule" "http" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "PublicIP"
-  backend_address_pool_id        = [azurerm_lb_backend_address_pool.bepool.id]
+  backend_address_pool_ids        = [azurerm_lb_backend_address_pool.bepool.id]
   probe_id                       = azurerm_lb_probe.http.id
 }
 
