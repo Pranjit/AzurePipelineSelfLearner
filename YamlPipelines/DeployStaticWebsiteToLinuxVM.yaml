@@ -53,12 +53,40 @@ variables:
   - name: TF_WORKING_DIR
     value: "terraform/azure-linux-vmss-static-site"  
 
-
-
 stages:
-  - stage: 'Teraform Init+validate+Plan+Apply'
-    displayName: 'Teraform Init+validate+Plan+Apply'
+  - stage: 'Terraform'
+    displayName: 'Terraform Deployment'
     jobs:
-      - job: "Te"
+      - job: TerraformJob
+        displayName: "Run Terraform to Create Resources for VMSS"
+        steps:
+        # Step 1: Install Terraform CLI
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: '1.5.7'
+
+          # Step 2: Initialize Terraform
+          - script: |
+              cd $(TF_WORKING_DIR)
+              terraform init
+            displayName: 'Terraform Init'
+
+          # Step 3: Terraform Validate
+          - script: |
+              cd $(TF_WORKING_DIR)
+              terraform validate
+            displayName: 'Terraform Validate'
+
+          # Step 4: Terraform Plan
+          - script: |
+              terraform -chdir=$(TF_WORKING_DIR) plan -out=tfplan -var "subscription_id=$(AZURE_SUBSCRIPTION_ID)" -var "client_id=$(AZURE_CLIENT_ID)" -var "client_secret=$(AZURE_CLIENT_SECRET)" -var "tenant_id=$(AZURE_TENANT_ID)"
+            displayName: 'Terraform Plan'
+
+          # Step 5: Terraform Apply
+          - script: |
+              cd $(TF_WORKING_DIR)
+              terraform apply -auto-approve tfplan
+            displayName: 'Terraform Apply'
+          
       
 
