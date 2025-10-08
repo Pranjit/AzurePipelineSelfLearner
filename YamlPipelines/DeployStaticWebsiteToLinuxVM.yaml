@@ -48,7 +48,7 @@ parameters:
 
 variables:
   - group: TerraformSecrets
-  -name: build_id
+  - name: build_id
     value: $(Build.BuildId)
   - name: commitId
     value: $[ substring(variables['Build.SourceVersion'], 0, 7) ]  # short hash git commit id
