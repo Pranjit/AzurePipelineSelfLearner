@@ -2,7 +2,13 @@
 variable "commit_id" {
   description = "Git commit ID passed from CI/CD pipeline"
   type        = string
-  default     = "local"   # fallback for local runs
+  default     = "0"   # fallback for local runs
+}
+
+variable "build_id" {
+  description = "Build id  from CI/CD pipeline"
+  type        = string
+  default     = "0"   # fallback for local runs
 }
 
 variable "resource_group_name" {
