@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                = "vmss-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name 
   depends_on          = [azurerm_resource_group.rg] 
 }
 
@@ -22,7 +22,7 @@ resource "azurerm_subnet" "subnet" {
 resource "azurerm_public_ip" "pip" {
   name                = "vmss-public-ip"
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
   depends_on          = [azurerm_resource_group.rg] 
@@ -31,7 +31,7 @@ resource "azurerm_public_ip" "pip" {
 resource "azurerm_lb" "lb" {
   name                = "vmss-lb"
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard"
 
   frontend_ip_configuration {
@@ -67,7 +67,7 @@ resource "azurerm_lb_rule" "http" {
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   name                            = "web-vmss"
   location                        = var.location
-  resource_group_name             = var.resource_group_name
+  resource_group_name             = azurerm_resource_group.rg.name
   sku                             = "Standard_B1s"
   instances                       = 2
   admin_username                  = "azureuser"
