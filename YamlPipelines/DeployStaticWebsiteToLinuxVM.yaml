@@ -20,8 +20,6 @@
 # | extends          | Reuse templates across pipelines.                      |
 # ============================================
 
-name: DeployStaticWebsiteToLinuxVM
-
 trigger:
 - none
 
@@ -54,6 +52,8 @@ variables:
     value: $[ substring(variables['Build.SourceVersion'], 0, 7) ]  # short hash git commit id
   - name: TF_WORKING_DIR
     value: "terraform/azure-linux-vmss-static-site"  
+
+name: ${{ parameters.environment }}-$(Build.BuildId)-DeployStaticWebsiteToLinuxVM
 
 stages:
   - stage: 'Terraform'
