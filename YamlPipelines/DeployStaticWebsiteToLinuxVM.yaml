@@ -50,6 +50,8 @@ parameters:
 
 variables:
   - group: TerraformSecrets
+  - name: commitId
+    value: $[ substring(variables['Build.SourceVersion'], 0, 7) ]  # short hash git commit id
   - name: TF_WORKING_DIR
     value: "terraform/azure-linux-vmss-static-site"  
 
@@ -79,7 +81,7 @@ stages:
 
           # Step 4: Terraform Plan
           - script: |
-              terraform -chdir=$(TF_WORKING_DIR) plan -out=tfplan -var "subscription_id=$(AZURE_SUBSCRIPTION_ID)" -var "client_id=$(AZURE_CLIENT_ID)" -var "client_secret=$(AZURE_CLIENT_SECRET)" -var "tenant_id=$(AZURE_TENANT_ID)"
+              terraform -chdir=$(TF_WORKING_DIR) plan -out=tfplan -var "subscription_id=$(AZURE_SUBSCRIPTION_ID)" -var "client_id=$(AZURE_CLIENT_ID)" -var "client_secret=$(AZURE_CLIENT_SECRET)" -var "tenant_id=$(AZURE_TENANT_ID)" -var "commit_id=$(commitId)"
             displayName: 'Terraform Plan'
 
           # Step 5: Terraform Apply
