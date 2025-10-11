@@ -134,17 +134,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     settings = jsonencode({
       "commandToExecute" = <<-EOF
         #!/bin/bash
-        apt update && apt install -y nginx
-        echo '<h1>Hello</h1>' > /var/www/html/index.html
-    
-        # Get Azure instance ID using metadata service
-        instance_id=$(curl -H "Metadata:true" "http://169.254.169.254/metadata/instance/compute/vmId?api-version=2021-02-01&format=text")
-    
-        # Log the instance ID
-        echo "Instance ID: $instance_id" | tee /var/log/instance_id.txt
-    
-        # Optionally, write it to the web page
-        echo "<p>Instance ID: $instance_id</p>" >> /var/www/html/index.html
+        apt update && apt install -y nginx git        
+        git clone https://github.com/Pranjit/AzurePipelineSelfLearner.git /var/www/html    
       EOF
     })
   }
