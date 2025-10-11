@@ -63,7 +63,33 @@ resource "azurerm_lb_rule" "http" {
   backend_address_pool_ids        = [azurerm_lb_backend_address_pool.bepool.id]
   probe_id                       = azurerm_lb_probe.http.id
 }
+# Define the Network Security Group
+resource "azurerm_network_security_group" "nsg" {
+  name                = "lb-nsg"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
 
+# Define an inbound rule for HTTP traffic on port 80
+resource "azurerm_network_security_rule" "http_inbound" {
+  name                        = "allow-http-inbound"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "Internet"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+# Associate the NSG with your subnet
+resource "azurerm_subnet_network_security_group_association" "nsg_association" {
+  subnet_id                 = azurerm_subnet.subnet.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   name                            = "web-vmss"
   location                        = var.location
