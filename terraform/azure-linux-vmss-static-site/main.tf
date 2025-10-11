@@ -134,8 +134,27 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     settings = jsonencode({
       "commandToExecute" = <<-EOF
         #!/bin/bash
-        apt update && apt install -y nginx git        
-        git clone https://github.com/Pranjit/AzurePipelineSelfLearner.git /var/www/html    
+        apt update -y && apt install -y git nginx curl
+        # Create working directory
+        mkdir -p /var/www/html
+        cd /var/www/html
+    
+        # Initialize empty Git repo
+        git init
+        git remote add origin https://github.com/Pranjit/AzurePipelineSelfLearner.git
+    
+        # Enable sparse checkout (so we can fetch only a subfolder)
+        git config core.sparseCheckout true
+    
+        # Specify the folder you want from repo (relative path)
+        echo "SampleWebSites/StaticWeb/" >> .git/info/sparse-checkout
+    
+        # Pull from main branch (change if branch name is different)
+        git pull origin main
+    
+        # Restart Nginx
+        systemctl enable nginx
+        systemctl restart nginx
       EOF
     })
   }
