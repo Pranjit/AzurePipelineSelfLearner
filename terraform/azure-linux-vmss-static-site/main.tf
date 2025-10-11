@@ -151,10 +151,16 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     
         # Pull from main branch (change if branch name is different)
         git pull origin main
+
+        # Move the content of SampleWebSites/StaticWeb/* to current folder
+        mv SampleWebSites/StaticWeb/* ./
     
+        # Remove the now empty directories
+        rm -rf SampleWebSites
+
         # Restart Nginx
-        systemctl enable nginx
-        systemctl restart nginx
+        #systemctl enable nginx
+        #systemctl restart nginx
       EOF
     })
   }
