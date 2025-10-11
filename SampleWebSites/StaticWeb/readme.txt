@@ -1,26 +1,31 @@
-UNIQUE – is a modern, elegant and clean one page html5 template built with valid HTML5 & CSS3. It's based on latest Bootstrap framework 3.3.1 fully responsive web compatible with multi browser and devices. This template can be used for multi-purpose needs like business, consultancy, agency, personal portfolio, profile, mobile website and startup company.
-
-Key features
--------------
-Twitter Bootstrap 3.3.1
-Clean & Developer-friendly HTML5 and CSS3 code
-100% Responsive Layout Design
-One Page
-Multipurpose theme
-Google Fonts Support
-Font Awesome 
-Smooth Scrolling 
-Fully Customizable
-Contact Form
+Paradigm Shift by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
 
-Credits :
--------
-=> Design and developed: "WebThemez"  http://webthemez.com
-=> Photos used in template: **Unsplash** - http://unsplash.com
-=> For more free web themes: http://webthemez.com
-=> Framework : http://getbootstrap.com
+Say hello to Paradigm Shift, my first addition to HTML5 UP in more than a year (!!!).
+Took things in a slightly different direction with this one, partly to mess with CSS
+grid (which this one relies on pretty heavily) but mostly to get back to making weirder
+and more experimental designs/layouts. Anyway, hope you dig it, and thanks for the
+continued support despite the lack of updates :)
 
-License :
--------
-**Creative Commons Attribution 3.0** - http://creativecommons.org/licenses/by/3.0/
+Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
+you can use for pretty much whatever.
+
+(* = not included)
+
+AJ
+aj@lkn.io | @ajlkn
+
+
+Credits:
+
+	Demo Images:
+		Unsplash (unsplash.com)
+
+	Icons:
+		Font Awesome (fontawesome.io)
+
+	Other:
+		jQuery (jquery.com)
+		Responsive Tools (github.com/ajlkn/responsive-tools)
