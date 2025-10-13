@@ -1,2 +1,4 @@
-varables:
-    
+variables:
+    # Defile local variable 
+   appName: my-webapp
+   location: eastus 
