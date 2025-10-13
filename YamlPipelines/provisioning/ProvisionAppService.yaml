@@ -24,7 +24,7 @@ stages:
              - script: |
                 echo "=== All Environment Variables ==="
                 printenv | sort
-              displayName: "Show All Pipeline Variables"
+               displayName: "Show All Pipeline Variables"
 
             # Step 2: Install Terraform CLI
              - task: TerraformInstaller@1
@@ -35,22 +35,22 @@ stages:
              - script: |
                 cd $(TF_WORKING_DIR)
                 terraform init
-              displayName: 'Terraform Init'
+               displayName: 'Terraform Init'
 
             # Step 3: Terraform Validate
              - script: |
                 cd $(TF_WORKING_DIR)
                 terraform validate
-              displayName: 'Terraform Validate'
-                      # Step 4: Terraform Plan
+               displayName: 'Terraform Validate'
+            # Step 4: Terraform Plan
              - script: |
                 terraform -chdir=$(TF_WORKING_DIR) plan -out=tfplan -var "subscription_id=$(AZURE_SUBSCRIPTION_ID)" -var "client_id=$(AZURE_CLIENT_ID)" -var "client_secret=$(AZURE_CLIENT_SECRET)" -var "tenant_id=$(AZURE_TENANT_ID)" -var "build_id=$(build_id)"
-              displayName: 'Terraform Plan'
+               displayName: 'Terraform Plan'
 
           # Step 5: Terraform Apply
              - script: |
                 cd $(TF_WORKING_DIR)
                 terraform apply -auto-approve tfplan
-              displayName: 'Terraform Apply'
+               displayName: 'Terraform Apply'
 
 
