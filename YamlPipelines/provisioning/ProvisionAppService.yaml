@@ -10,7 +10,7 @@ variables:
     - group: TerraformSecrets
 
     # Load variable from another template
-    - template: "/common_variable.yaml"
+    - template: "common_variable.yaml"
 
 name: "Appservice deployment"
 
