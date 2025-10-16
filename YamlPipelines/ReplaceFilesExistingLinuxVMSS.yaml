@@ -4,10 +4,10 @@ trigger:
 name: 'Upload File to VMSS'
 
 steps:
-  - task: Checkout@1
-
-  - script: |     
-      echo "Files in repo:"
+- script: |
+    echo "Files in repo:"
+    ls -R
+  displayName: 'List all files'
       
 
  
