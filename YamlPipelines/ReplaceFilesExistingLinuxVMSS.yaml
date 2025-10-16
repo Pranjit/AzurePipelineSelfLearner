@@ -15,7 +15,8 @@ steps:
   - script: |
       echo "Packaging CSS file..."
       tar -czf /tmp/folder.tar.gz ${{ variables.gitfolderpath }}
-      ll
+      echo "Checking if tar file was created..."
+      ls -lh /tmp/folder.tar.gz
     displayName: "Compress updated CSS file"
     
   - task: AzureCLI@2
