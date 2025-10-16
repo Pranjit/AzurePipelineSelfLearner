@@ -1,7 +1,9 @@
 trigger:
   - none
 
+name: 'Execute Linux Script'
+
 steps:
   - script: |
       echo 'hello'
-name: 'Execute Linux Script'
+    name: 'Execute Script'
