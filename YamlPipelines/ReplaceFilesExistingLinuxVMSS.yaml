@@ -6,12 +6,25 @@ trigger:
 variables:
   resourceGroup: 'vmss-static-web-rg-208'
   vmssName: 'web-vmss'
-  targetPath: '/var/www/html/css'
-  fileName: 'style.css'
+  targetPath: '/var/www/html'
+  gitfilepath: 'Resources/v2/css/login.css'
+  gitfolderpath: 'Resources/v2/'
 
 name: 'Replace Files in Existing LinuxVMSS'
 
 steps:
+  - task: Checkout@1  # To checkout the current repo so that we can coly the folder from repo 
+
+  - script: |         # Used to create package of file to copy
+      echo "Packaging CSS file..."
+      tar -czf file.tar.gz ${{ variables.gitfilepath }}
+    displayName: "Compress file"
+
+  - script: |         # Used to create package of folder to copy
+      echo "Packaging CSS file..."
+      tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
+    displayName: "Compress folder content"
+
   - task: AzureCLI@2
     inputs:
       azureSubscription: 'pranjit-playground(69869722-481a-4f0b-b1b2-800a599c43fd)'  # <-- your Azure service connection name
@@ -22,6 +35,12 @@ steps:
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
         for id in $instances; do
           echo "Updating instance: $id"
+          az vmss run-command invoke \
+            --command-id RunShellScript \
+            --name ${{ variables.vmssName }} \
+            --resource-group ${{ variables.resourceGroup }} \
+            --instance-id $id \
+            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo '${BUILD_SOURCEDIRECTORY}' && tar -xzf /tmp/folder.tar.gz -C /var/www/html && systemctl restart nginx"
         done
     displayName: "Deploy updated CSS to all VMSS instances"
 
