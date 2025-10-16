@@ -6,9 +6,8 @@ name: 'Upload File to VMSS'
 steps:
   - task: Checkout@1
 
-  - script: |
-      ls -l
+  - script: |     
       echo "Files in repo:"
-      ls -l $(Build.SourcesDirectory)/website/css
+      
 
  
