@@ -16,6 +16,19 @@ steps:
       echo "Packaging CSS file..."
       tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
     displayName: "Compress updated CSS file"
+    
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'pranjit-playground(69869722-481a-4f0b-b1b2-800a599c43fd)'  # <-- your Azure service connection name
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        echo "Listing VMSS instances..."
+        instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
+        for id in $instances; do
+          echo "Updating instance: $id"
+        done
+    displayName: "Deploy updated CSS to all VMSS instances"
       
 
  
