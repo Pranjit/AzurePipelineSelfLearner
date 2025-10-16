@@ -29,7 +29,7 @@ steps:
         echo "Listing VMSS instances..."
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
         for id in $instances; do
-          echo "Updating instance: $id"         
+          echo "Updating instance: $id"
         done
     displayName: "Deploy updated CSS to all VMSS instances"
 
