@@ -12,10 +12,5 @@ variables:
 
 name: 'Replace Files in Existing LinuxVMSS'
 
-steps:
+steps:  
   - task: Checkout@1  # To checkout the current repo so that we can coly the folder from repo 
-
-  - script: |
-      echo "Packaging CSS file..."
-      tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
-    displayName: "Compress folder content"
