@@ -14,7 +14,7 @@ steps:
 
   - script: |
       echo "Packaging CSS file..."
-      tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
+      tar -czf /tmp/folder.tar.gz ${{ variables.gitfolderpath }}
     displayName: "Compress updated CSS file"
     
   - task: AzureCLI@2
@@ -27,6 +27,12 @@ steps:
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
         for id in $instances; do
           echo "Updating instance: $id"
+          az vmss run-command invoke \
+            --command-id RunShellScript \
+            --name ${{ variables.vmssName }} \
+            --resource-group ${{ variables.resourceGroup }} \
+            --instance-id $id \
+            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo '${BUILD_SOURCEDIRECTORY}' && tar -xzf /tmp/folder.tar.gz -C /var/www/html && systemctl restart nginx"
         done
     displayName: "Deploy updated CSS to all VMSS instances"
       
