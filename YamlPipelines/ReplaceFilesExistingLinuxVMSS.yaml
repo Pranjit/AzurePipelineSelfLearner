@@ -15,7 +15,7 @@ name: 'Replace Files in Existing LinuxVMSS'
 steps:
   - task: Checkout@1  # To checkout the current repo so that we can coly the folder from repo 
 
-  - script: |         # Used to create package of folder to copy
+  - script: |
       echo "Packaging CSS file..."
       tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
     displayName: "Compress folder content"
@@ -29,8 +29,7 @@ steps:
         echo "Listing VMSS instances..."
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
         for id in $instances; do
-          echo "Updating instance: $id"
-         
+          echo "Updating instance: $id"         
         done
     displayName: "Deploy updated CSS to all VMSS instances"
 
