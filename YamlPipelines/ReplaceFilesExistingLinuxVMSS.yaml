@@ -4,6 +4,7 @@ trigger:
 name: 'Upload File to VMSS'
 
 steps:
+  - checkout: self
   - script: |
       echo "Files in repo:"
       ls -R
