@@ -4,7 +4,7 @@ trigger:
       - main  # runs when you push to main branch
    
 variables:
-  resourceGroup: 'vmss-static-web-rg-206'
+  resourceGroup: 'vmss-static-web-rg-208'
   vmssName: 'web-vmss'
   targetPath: '/var/www/html/css'
   fileName: 'style.css'
