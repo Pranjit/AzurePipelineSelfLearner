@@ -30,7 +30,7 @@ steps:
       scriptLocation: inlineScript
       inlineScript: |
         echo "Listing VMSS instances..."
-        TAR_B64=$(base64 folder.tar.gz)
+        TAR_B64=$(base64 /tmp/folder.tar.gz)
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)        
         for id in $instances; do
           echo "Updating instance: $id"
