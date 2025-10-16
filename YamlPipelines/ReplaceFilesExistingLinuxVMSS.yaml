@@ -4,6 +4,8 @@ trigger:
 name: 'Upload File to VMSS'
 
 steps:
+  - task: checkout@1
+  
   - script: |
       echo 'ssss'
 
