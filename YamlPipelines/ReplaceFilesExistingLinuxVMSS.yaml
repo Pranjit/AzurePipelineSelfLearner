@@ -17,6 +17,7 @@ steps:
       tar -czf /tmp/folder.tar.gz ${{ variables.gitfolderpath }}
       echo "Checking if tar file was created..."
       ls -lh /tmp/folder.tar.gz
+      base64 /tmp/folder.tar.gz > /tmp/folder.b64  #Convert to base 64 to transfer to VM
     displayName: "Compress updated CSS file"
     
   - task: AzureCLI@2
@@ -34,7 +35,7 @@ steps:
             --name ${{ variables.vmssName }} \
             --resource-group ${{ variables.resourceGroup }} \
             --instance-id $id \
-            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo '${BUILD_SOURCEDIRECTORY}' && tar -xzf /tmp/folder.tar.gz -C /var/www/html && systemctl restart nginx"
+            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo '${BUILD_SOURCEDIRECTORY}' && base64 -d /tmp/folder.b64 > /tmp/deploy/folder.tar.gz && tar -xzf /tmp/folder.tar.gz -C /var/www/html && systemctl restart nginx"
         done
     displayName: "Deploy updated CSS to all VMSS instances"
       
