@@ -39,16 +39,7 @@ steps:
             --name ${{ variables.vmssName }} \
             --resource-group ${{ variables.resourceGroup }} \
             --instance-id $id \
-            --scripts "
-              mkdir -p /tmp/deploy
-              cd /tmp/deploy
-              echo 'Updating website...'
-              rm -rf *
-              echo $TAR_B64 | base64 -d > /tmp/deploy/folder.tar.gz
-              tar -xzf /tmp/deploy/folder.tar.gz -C ${{ variables.targetPath }}
-              systemctl restart nginx
-              echo 'Deployment completed for instance $id'
-            "
+            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo $TAR_B64 | base64 -d > /tmp/deploy/folder.tar.gz && tar -xzf /tmp/deploy/folder.tar.gz -C ${{ variables.targetPath }} && systemctl restart nginx && echo 'Deployment completed for instance $id'"
         done
     displayName: "Deploy updated CSS to all VMSS instances"
       
