@@ -7,7 +7,5 @@ name: 'Upload File to VMSS'
 
 steps:
   - task: Checkout@1
-  - script: |
-        echo "Compressing website files..."
-        tar -czf website.tar.gz website/
-    displayName: "Prepare website package"
+
+ 
