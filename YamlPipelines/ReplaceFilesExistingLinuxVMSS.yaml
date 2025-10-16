@@ -4,10 +4,11 @@ trigger:
 name: 'Upload File to VMSS'
 
 steps:
-  - task: checkout@1
-  
-  - script: |
-      echo 'ssss'
+  - task: Checkout@1
 
+  - script: |
+      ls -l
+      echo "Files in repo:"
+      ls -l $(Build.SourcesDirectory)/website/css
 
  
