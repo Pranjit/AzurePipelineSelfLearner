@@ -30,7 +30,7 @@ steps:
       scriptLocation: inlineScript
       inlineScript: |
         echo "Listing VMSS instances..."
-        TAR_B64=$(base64 website.tar.gz)
+        TAR_B64=$(base64 folder.tar.gz)
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)        
         for id in $instances; do
           echo "Updating instance: $id"
@@ -43,8 +43,8 @@ steps:
               mkdir -p /tmp/deploy
               cd /tmp/deploy
               echo 'Updating website...'
-              echo $TAR_B64 | base64 -d > /tmp/deploy/website.tar.gz
-              tar -xzf /tmp/deploy/website.tar.gz -C /var/www/html
+              echo $TAR_B64 | base64 -d > /tmp/deploy/folder.tar.gz
+              tar -xzf /tmp/deploy/folder.tar.gz -C /var/www/html
               systemctl restart nginx
             "
         done
