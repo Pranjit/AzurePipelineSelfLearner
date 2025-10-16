@@ -2,13 +2,6 @@ trigger:
   branches:
     include:
       - main  # runs when you push to main branch
-   
-variables:
-  resourceGroup: 'vmss-static-web-rg-208'
-  vmssName: 'web-vmss'
-  targetPath: '/var/www/html'
-  gitfilepath: 'Resources/v2/css/login.css'
-  gitfolderpath: 'Resources/v2/'
 
 name: 'Replace Files in Existing LinuxVMSS'
 
