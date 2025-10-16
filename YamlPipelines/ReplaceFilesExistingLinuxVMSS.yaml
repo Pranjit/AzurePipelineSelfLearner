@@ -1,14 +1,21 @@
 trigger:
   - none
-  
+
+variables:
+  resourceGroup: 'vmss-static-web-rg-208'
+  vmssName: 'web-vmss'
+  targetPath: '/var/www/html'  
+  gitfolderpath: 'Resources/v2/'
+
 name: 'Upload File to VMSS'
 
 steps:
   - checkout: self
+
   - script: |
-      echo "Files in repo:"
-      ls -R
-    displayName: 'List all files'
+      echo "Packaging CSS file..."
+      tar -czf folder.tar.gz ${{ variables.gitfolderpath }}
+    displayName: "Compress updated CSS file"
       
 
  
