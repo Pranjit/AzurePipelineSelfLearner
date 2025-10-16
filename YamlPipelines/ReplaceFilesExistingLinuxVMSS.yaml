@@ -1,9 +1,13 @@
 trigger:
-  branches:
-    include:
-      - main  # runs when you push to main branch
+    branches:
+       include:
+         - main
 
-name: 'Replace Files in Existing LinuxVMSS'
+name: 'Upload File to VMSS'
 
-steps:  
-  - task: Checkout@1  # To checkout the current repo so that we can coly the folder from repo 
+steps:
+  - task: Checkout@1
+  - script: |
+        echo "Compressing website files..."
+        tar -czf website.tar.gz website/
+    displayName: "Prepare website package"
