@@ -17,9 +17,12 @@ steps:
       tar -czf /tmp/folder.tar.gz ${{ variables.gitfolderpath }}
       echo "Checking if tar file was created..."
       ls -lh /tmp/folder.tar.gz
-      base64 /tmp/folder.tar.gz > /tmp/folder.b64  #Convert to base 64 to transfer to VM
-    displayName: "Compress updated CSS file"
-    
+
+      # Convert to base64 string for transfer
+      TAR_B64=$(base64 /tmp/folder.tar.gz)
+      echo $TAR_B64 > /tmp/folder.b64
+    displayName: "Compress updated CSS file"   
+  
   - task: AzureCLI@2
     inputs:
       azureSubscription: 'pranjit-playground(69869722-481a-4f0b-b1b2-800a599c43fd)'  # <-- your Azure service connection name
@@ -28,6 +31,7 @@ steps:
       inlineScript: |
         echo "Listing VMSS instances..."
         instances=$(az vmss list-instances --resource-group ${{ variables.resourceGroup }} --name ${{ variables.vmssName }} --query "[].instanceId" -o tsv)
+        TAR_B64=$(base64 /tmp/folder.tar.gz) 
         for id in $instances; do
           echo "Updating instance: $id"
           az vmss run-command invoke \
@@ -35,7 +39,16 @@ steps:
             --name ${{ variables.vmssName }} \
             --resource-group ${{ variables.resourceGroup }} \
             --instance-id $id \
-            --scripts "mkdir -p /tmp/deploy && cd /tmp/deploy && echo 'Updating website...' && rm -rf * && echo '${BUILD_SOURCEDIRECTORY}' && base64 -d /tmp/folder.b64 > /tmp/deploy/folder.tar.gz && tar -xzf /tmp/folder.tar.gz -C /var/www/html && systemctl restart nginx"
+            --scripts "
+              mkdir -p /tmp/deploy
+              cd /tmp/deploy
+              echo 'Updating website...'
+              rm -rf *
+              echo $TAR_B64 | base64 -d > /tmp/deploy/folder.tar.gz
+              tar -xzf /tmp/deploy/folder.tar.gz -C ${{ variables.targetPath }}
+              systemctl restart nginx
+              echo 'Deployment completed for instance $id'
+            "
         done
     displayName: "Deploy updated CSS to all VMSS instances"
       
