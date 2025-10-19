@@ -2,7 +2,7 @@ trigger:
     - none
 
 variables:
-    TF_WORKING_DIR: "/terraform/azure-storage-account"
+    TF_WORKING_DIR: "terraform/azure-storage-account"
 
 steps:
     - checkout: self
