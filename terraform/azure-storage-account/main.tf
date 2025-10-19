@@ -6,7 +6,7 @@ resource "random_id" "unique" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg-storage-demo"
+  name     = "rg-storage-demo${random_id.unique.hex}" # auto unique"
   location = "East US"
 }
 
