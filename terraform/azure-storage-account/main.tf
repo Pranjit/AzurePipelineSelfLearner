@@ -1,3 +1,10 @@
+# ------------------------------------------------------------
+# Generate a random suffix
+# ------------------------------------------------------------
+resource "random_id" "unique" {
+  byte_length = 4  # generates an 8-character hex string
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = "rg-storage-demo"
   location = "East US"
@@ -7,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
 # Storage Account
 # ------------------------------------------------------------
 resource "azurerm_storage_account" "storage" {
-  name                     = "mystorageacctdemo123"
+  name                     = "mystorage${random_id.unique.hex}" # auto unique
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
