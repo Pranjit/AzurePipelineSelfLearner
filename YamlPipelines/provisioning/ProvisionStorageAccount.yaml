@@ -2,8 +2,11 @@ trigger:
     - none
 
 variables:
-    TF_WORKING_DIR: "terraform/azure-storage-account"
-
+  - name: TF_WORKING_DIR
+    value: "terraform/azure-storage-account"
+    
+  # Load shared secrets from Library Variable Group
+  - group: TerraformSecrets
 steps:
     - checkout: self
 
